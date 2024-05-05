@@ -1,0 +1,17 @@
+.list-container {
+   display: flex;
+   gap: 10px;
+   flex-direction: column;
+   overflow-y: auto;
+   max-height: calc(100vh - 100px);
+   width: 40%;
+}
+
+.list-container  p {
+   margin: 0;
+}
+
+.list-title {
+   font-size: large;
+   font-weight: bold;
+}
