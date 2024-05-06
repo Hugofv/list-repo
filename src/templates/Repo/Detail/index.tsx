@@ -1,38 +1,58 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Markdown from 'react-markdown';
+import ReactLoading from 'react-loading';
+
 import './style.css';
 import Flex from '../../../components/Flex';
 import { FaLink } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppState } from '../../../store';
+import { getReadme } from '../../../store/modules/repo/actions';
 
 interface DetailProps {
   repo: any;
 }
 
 const Detail: React.FC<DetailProps> = ({ repo }) => {
-  const [markdown, setMarkdown] = useState('');
+  const dispatch = useDispatch();
+  const { repo: repoState } = useSelector((state: AppState) => state);
+  const { readme, readmeLoading, readmeError } = repoState;
 
   useEffect(() => {
     if (repo) {
-      fetch(
-        `https://raw.githubusercontent.com/${repo?.owner?.login}/${repo?.name}/${repo.default_branch}/README.md`
-      )
-        .then((response) => {
-          return response.text();
-        })
-        .then((response) => setMarkdown(response));
+      dispatch(getReadme(repo?.owner?.login, repo?.name, repo.default_branch));
     }
   }, [repo]);
 
+  if (readmeLoading && !readmeError) {
+    return (
+      <div className='detail-container'>
+        <Flex justifyContent='center' alignItems='center'>
+          <ReactLoading type='spin' color='#fff' />
+        </Flex>
+      </div>
+    );
+  }
+
   return (
     <div className='detail-container'>
-      <Flex>
-        <Flex alignItems='center' gap='8px'>
-          <FaLink />
-          <strong>Link: </strong>
-          <a href={repo?.url}>aqui</a>
+      {repo ? (
+        <Flex>
+          <Flex alignItems='center' gap='8px'>
+            <FaLink />
+            <strong>Link: </strong>
+            <a href={repo?.url}>aqui</a>
+          </Flex>
         </Flex>
-      </Flex>
-      {markdown ? <Markdown>{markdown}</Markdown> : null}
+      ) : null}
+
+      {readme ? (
+        <Markdown>{readme}</Markdown>
+      ) : repo ? (
+        <span>Readme não encontrado</span>
+      ) : (
+        <span>Selecione um repositório</span>
+      )}
     </div>
   );
 };

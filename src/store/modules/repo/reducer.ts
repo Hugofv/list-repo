@@ -4,6 +4,9 @@ interface RepoReducer {
   loading: boolean;
   error: boolean;
   repos: any[];
+  readmeLoading: boolean;
+  readmeError: boolean;
+  readme: any;
 }
 
 const initialState = {
