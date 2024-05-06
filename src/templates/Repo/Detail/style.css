@@ -1,4 +1,23 @@
 .detail-container {
-   width: 60%;
+   width: 100%;
    padding: 1rem;
+   max-height: calc(100vh - 400px);
+   overflow-y: auto;
+}
+
+@media (min-width: 600px) {
+   .detail-container {
+      width: 100%;
+   }
+}
+@media (min-width: 768px) {
+   .detail-container {
+      width: 45%;
+      max-height: calc(100vh - 150px);
+   }
+}
+@media (min-width: 1200px) {
+   .detail-container {
+      width: 55%;
+   }
 }

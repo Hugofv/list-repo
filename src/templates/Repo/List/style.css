@@ -3,8 +3,27 @@
    gap: 10px;
    flex-direction: column;
    overflow-y: auto;
-   max-height: calc(100vh - 100px);
-   width: 40%;
+   max-height: calc(100vh - 400px);
+   width: 100%;
+   margin-top: 1.5rem;
+   padding: 1rem;
+}
+
+@media (min-width: 600px) {
+   .list-container {
+      width: 100%;
+   }
+}
+@media (min-width: 768px) {
+   .list-container {
+      width: 45%;
+      max-height: calc(100vh - 150px);
+   }
+}
+@media (min-width: 900px) {
+   .list-container {
+      width: 40%;
+   }
 }
 
 .list-container  p {
@@ -14,4 +33,11 @@
 .list-title {
    font-size: large;
    font-weight: bold;
+   border-bottom: 1px solid #eee;
+   margin: 10px 0;
+}
+
+.list-detail {
+   display: flex;
+   gap: 8px;
 }

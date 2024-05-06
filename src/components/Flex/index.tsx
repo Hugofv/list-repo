@@ -6,6 +6,7 @@ interface FlexProps {
   alignItems?:
     | 'normal'
     | 'stretch'
+    | 'center'
     | 'positional alignment'
     | 'flex-start'
     | 'flex-end'
@@ -31,6 +32,8 @@ interface FlexProps {
     | 'space-evenly'
     | 'initial'
     | 'inherit';
+  flexWrap?: 'nowrap' | 'wrap' | 'wrap-reverse' | 'initial' | 'inherit';
+  gap?: string | number;
 }
 
 const Flex: React.FC<FlexProps> = ({
@@ -38,11 +41,13 @@ const Flex: React.FC<FlexProps> = ({
   justifyContent,
   alignContent,
   alignItems,
+  flexWrap,
+  gap,
 }) => {
   return (
     <div
       className='flex-container'
-      style={{ justifyContent, alignItems, alignContent }}
+      style={{ justifyContent, alignItems, alignContent, flexWrap, gap }}
     >
       {children}
     </div>
