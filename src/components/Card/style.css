@@ -11,3 +11,7 @@
 .card-clicable:hover {
    background-color: #4258d3 !important;
 }
+
+.card-active {
+   background-color: #6a7ad6;
+}

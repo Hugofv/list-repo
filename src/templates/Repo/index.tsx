@@ -23,9 +23,9 @@ const Repo: React.FC = () => {
       <SearchInput onSearch={handleSearch} placeholder='Usúario' />
 
       <Flex flexWrap='wrap'>
-        <List repos={repos} handleRepo={setSelectedRepo} />
+        <List repos={repos} selectedRepo={selectedRepo} handleRepo={setSelectedRepo} />
 
-        <Detail repo={selectedRepo} />
+        <Detail repo={selectedRepo}  />
       </Flex>
     </div>
   );

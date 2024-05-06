@@ -10,10 +10,11 @@ import Flex from '../../../components/Flex';
 
 interface ListProps {
   repos: any[];
+  selectedRepo: any;
   handleRepo: React.Dispatch<any>;
 }
 
-const List: React.FC<ListProps> = ({ repos, handleRepo }) => {
+const List: React.FC<ListProps> = ({ repos, selectedRepo, handleRepo }) => {
   const { repo: repoState } = useSelector((state: AppState) => state);
   const { loading } = repoState;
 
@@ -31,7 +32,12 @@ const List: React.FC<ListProps> = ({ repos, handleRepo }) => {
     <div className='list-container'>
       {repos?.length ? (
         repos?.map((repo) => (
-          <Card key={repo?.id} isClicable onClick={() => handleRepo(repo)}>
+          <Card
+            isClicable
+            key={repo?.id}
+            active={repo?.id === selectedRepo?.id}
+            onClick={() => handleRepo(repo)}
+          >
             <div className='list-title'>{repo?.name}</div>
             <p className='list-detail'>
               <FaCode />
