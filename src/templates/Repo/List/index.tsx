@@ -35,7 +35,7 @@ const List: React.FC<ListProps> = ({ repos, selectedRepo, handleRepo }) => {
           <Card
             isClicable
             key={repo?.id}
-            data-testid={`repo-${i}`}
+            testId={`repo-${i}`}
             active={repo?.id === selectedRepo?.id}
             onClick={() => handleRepo(repo)}
           >

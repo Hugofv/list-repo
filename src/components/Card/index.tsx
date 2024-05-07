@@ -6,6 +6,7 @@ interface CardStyle {
   isClicable?: boolean;
   active?: boolean;
   onClick?: () => void;
+  testId?: string;
 }
 
 const Card: React.FC<CardStyle> = ({
@@ -13,10 +14,11 @@ const Card: React.FC<CardStyle> = ({
   isClicable,
   active,
   onClick,
+  testId
 }) => (
   <div
     onClick={onClick}
-    data-testid='card-container'
+    data-testid={testId || 'card-container'}
     className={`card-container ${isClicable ? 'card-clicable' : ''} ${
       active ? 'card-active' : ''
     }`}
