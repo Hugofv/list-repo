@@ -11,13 +11,15 @@ import { getReadme } from '../../../store/modules/repo/actions';
 
 interface DetailProps {
   repo: any;
+  refDetail: React.RefObject<HTMLDivElement>;
 }
 
-const Detail: React.FC<DetailProps> = ({ repo }) => {
+const Detail: React.FC<DetailProps> = ({ repo, refDetail }) => {
   const dispatch = useDispatch();
   const { repo: repoState } = useSelector((state: AppState) => state);
   const { readme, readmeLoading, readmeError } = repoState;
 
+  console.log(repoState)
   useEffect(() => {
     if (repo) {
       dispatch(getReadme(repo?.owner?.login, repo?.name, repo.default_branch));
@@ -26,7 +28,7 @@ const Detail: React.FC<DetailProps> = ({ repo }) => {
 
   if (readmeLoading && !readmeError) {
     return (
-      <div className='detail-container'>
+      <div className='detail-container' data-testid='detail-loading' ref={refDetail}>
         <Flex justifyContent='center' alignItems='center'>
           <ReactLoading type='spin' color='#fff' />
         </Flex>
@@ -35,7 +37,7 @@ const Detail: React.FC<DetailProps> = ({ repo }) => {
   }
 
   return (
-    <div className='detail-container'>
+    <div className='detail-container' ref={refDetail}>
       {repo ? (
         <Flex>
           <Flex alignItems='center' gap='8px'>

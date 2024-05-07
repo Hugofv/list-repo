@@ -30,11 +30,16 @@ const SearchInput: React.FC<SearchInputProps> = ({ onSearch, ...props }) => {
         <input
           onChange={onChangeSearch}
           onKeyDown={onKeyDown}
+          data-testid='search-input'
           className='search-input'
           type='text'
           {...props}
         />
-        <FaSearch onClick={onHandleSearch} className='search-icon' />
+        <FaSearch
+          onClick={onHandleSearch}
+          data-testid='search-icon'
+          className='search-icon'
+        />
       </div>
     </Card>
   );

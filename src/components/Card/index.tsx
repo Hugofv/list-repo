@@ -16,6 +16,7 @@ const Card: React.FC<CardStyle> = ({
 }) => (
   <div
     onClick={onClick}
+    data-testid='card-container'
     className={`card-container ${isClicable ? 'card-clicable' : ''} ${
       active ? 'card-active' : ''
     }`}

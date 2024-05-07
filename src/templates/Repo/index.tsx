@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import SearchInput from '../../components/SearchInput';
 import List from './List';
 import Detail from './Detail';
@@ -11,6 +11,8 @@ const Repo: React.FC = () => {
   const [selectedRepo, setSelectedRepo] = useState<any>();
 
   const dispatch = useDispatch();
+  const refDetail = useRef<HTMLDivElement>(null);
+
   const { repo } = useSelector((state: AppState) => state);
   const { repos } = repo;
 
@@ -18,14 +20,23 @@ const Repo: React.FC = () => {
     dispatch(fetchAllRepos(username));
   };
 
+  const handleSelectRepo = (repo: any) => {
+    setSelectedRepo(repo);
+    refDetail.current?.scrollIntoView()
+  };
+
   return (
     <div>
       <SearchInput onSearch={handleSearch} placeholder='Usúario' />
 
       <Flex flexWrap='wrap'>
-        <List repos={repos} selectedRepo={selectedRepo} handleRepo={setSelectedRepo} />
+        <List
+          repos={repos}
+          selectedRepo={selectedRepo}
+          handleRepo={handleSelectRepo}
+        />
 
-        <Detail repo={selectedRepo}  />
+        <Detail refDetail={refDetail} repo={selectedRepo} />
       </Flex>
     </div>
   );
